@@ -9,7 +9,7 @@ public class AddressBook {
     //default constructor
     public AddressBook() {
         this.theList = new ArrayList<BaseContact>();	//Creating an empty list of BaseContacts
-        PersonContact p1 = new PersonContact("Jordan", "9518471268", "1592 Clydesdale ct", "nicolsj99@gmail.com", "May 3, 1999");
+        PersonContact p1 = new PersonContact("Jordan", "9518471268", "1592 Clydesdale ct", "nicolsj99@gmail.com", "person", "May 3, 1999");
         theList.add(p1);
     }//end default constructor
 

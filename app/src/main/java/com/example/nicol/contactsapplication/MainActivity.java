@@ -47,14 +47,14 @@ public class MainActivity extends AppCompatActivity {
             int positionEdited = incomingMessages.getInt("edit");
 
             if(url.equals("")){
-                PersonContact p = new PersonContact(name, phone, address, email, change);
+                PersonContact p = new PersonContact(name, phone, address, email, "person", change);
                 if(positionEdited > -1){
                     theList.getTheList().remove(positionEdited);
                 }
                 theList.getTheList().add(p);
                 adapter.notifyDataSetChanged();
             }else{
-                BusinessContact p = new BusinessContact(name, phone, address, email, change, url);
+                BusinessContact p = new BusinessContact(name, phone, address, email, "business", change, url);
                 if(positionEdited > -1){
                     theList.getTheList().remove(positionEdited);
                 }
@@ -75,13 +75,16 @@ public class MainActivity extends AppCompatActivity {
         lv_thelist.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                if(PersonContact.class.isInstance(theList.getTheList().get(position))){
+                if(theList.getTheList().get(position) instanceof PersonContact){
                     editPerson(position);
-                }else{
+                }
+                if(theList.getTheList().get(position) instanceof BusinessContact){
                     editBusiness(position);
                 }
             }
         });
+
+
 
     }
 

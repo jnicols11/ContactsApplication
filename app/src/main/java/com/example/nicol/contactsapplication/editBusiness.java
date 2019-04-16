@@ -9,7 +9,7 @@ import android.widget.EditText;
 
 public class editBusiness extends AppCompatActivity {
 
-    Button btn_call, btn_text, btn_email, btn_gps, btn_save;
+    Button btn_call, btn_text, btn_email, btn_gps, btn_save, btn_delete;
     EditText et_name, et_phone, et_address, et_email, et_change, et_url;
 
     int positionToEdit = -1;
@@ -23,6 +23,7 @@ public class editBusiness extends AppCompatActivity {
         btn_email = findViewById(R.id.btn_email);
         btn_gps = findViewById(R.id.btn_gps);
         btn_save = findViewById(R.id.btn_save);
+        btn_delete = findViewById(R.id.btn_delete);
 
         et_name = findViewById(R.id.et_name);
         et_phone = findViewById(R.id.et_phone);
@@ -75,6 +76,15 @@ public class editBusiness extends AppCompatActivity {
                 i.putExtra("change", newChange);
                 i.putExtra("url", newUrl);
 
+                startActivity(i);
+            }
+        });
+
+        btn_delete.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent i = new Intent(v.getContext(), MainActivity.class);
+                i.putExtra("edit", positionToEdit);
                 startActivity(i);
             }
         });

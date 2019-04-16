@@ -1,16 +1,18 @@
 package com.example.nicol.contactsapplication;
 
-public class BaseContact {
+public abstract class BaseContact {
     private String name;
     private String phone;
     private String address;
     private String email;
+    private String id;
 
-    public BaseContact(String name, String phone, String address, String email){
+    public BaseContact(String name, String phone, String address, String email, String id){
         this.name = name;
         this.phone = phone;
         this.address = address;
         this.email = email;
+        this.id = id;
     }//end constructor
 
     //Getters and Setters
@@ -44,5 +46,9 @@ public class BaseContact {
 
     public void setEmail(String email) {
         this.email = email;
+    }
+
+    public String getId(){
+        return id;
     }
 }

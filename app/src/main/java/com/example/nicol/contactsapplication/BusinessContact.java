@@ -4,8 +4,8 @@ public class BusinessContact extends BaseContact{
     private String hours;
     private String url;
 
-    public BusinessContact(String name, String phone, String address, String email, String hours, String url) {
-        super(name, phone, address, email);
+    public BusinessContact(String name, String phone, String address, String email, String id, String hours, String url) {
+        super(name, phone, address, email, id);
         this.hours = hours;
         this.url = url;
     }
