@@ -15,6 +15,8 @@ public abstract class BaseContact {
         this.id = id;
     }//end constructor
 
+
+
     //Getters and Setters
     public String getName() {
         return name;

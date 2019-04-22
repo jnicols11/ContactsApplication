@@ -16,6 +16,8 @@ public class addMenu extends AppCompatActivity {
     RadioButton rb_business, rb_personal;
     EditText et_name, et_phone, et_address, et_email, et_change, et_url;
 
+    int positionToEdit = -1;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -54,6 +56,7 @@ public class addMenu extends AppCompatActivity {
             @Override
             public void onClick(View v) {
 
+
                 // get strings from et_ objects
                 String newName = et_name.getText().toString();
                 String newPhone = et_phone.getText().toString();
@@ -73,6 +76,7 @@ public class addMenu extends AppCompatActivity {
                 i.putExtra("email", newEmail);
                 i.putExtra("change", newChange);
                 i.putExtra("url", newUrl);
+                i.putExtra("edit", positionToEdit);
 
                 startActivity(i);
             }

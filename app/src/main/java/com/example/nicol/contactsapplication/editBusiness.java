@@ -68,13 +68,13 @@ public class editBusiness extends AppCompatActivity {
                 //start main activity
                 Intent i = new Intent(v.getContext(), MainActivity.class);
 
-                i.putExtra("edit", positionToEdit);
                 i.putExtra("name", newName);
                 i.putExtra("phone", newPhone);
                 i.putExtra("address", newAddress);
                 i.putExtra("email", newEmail);
                 i.putExtra("change", newChange);
                 i.putExtra("url", newUrl);
+                i.putExtra("edit", positionToEdit);
 
                 startActivity(i);
             }
@@ -84,7 +84,7 @@ public class editBusiness extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 Intent i = new Intent(v.getContext(), MainActivity.class);
-                i.putExtra("edit", positionToEdit);
+                i.putExtra("url", "delete");
                 startActivity(i);
             }
         });

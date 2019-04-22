@@ -10,7 +10,7 @@ import android.widget.ListView;
 import android.widget.SearchView;
 
 public class MainActivity extends AppCompatActivity {
-    Button btn_add, btn_search;
+    Button btn_add, btn_save, btn_load;
     ListView lv_thelist;
     SearchView sv_search;
 
@@ -24,7 +24,8 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
 
         btn_add = findViewById(R.id.btn_add);
-        btn_search = findViewById(R.id.btn_search);
+        btn_save = findViewById(R.id.btn_save);
+        btn_load = findViewById(R.id.btn_load);
         lv_thelist = findViewById(R.id.lv_thelist);
         sv_search = findViewById(R.id.sv_search);
 
@@ -38,6 +39,7 @@ public class MainActivity extends AppCompatActivity {
 
         // capture incoming data
         if(incomingMessages != null){
+
             String name = incomingMessages.getString("name");
             String phone = incomingMessages.getString("phone");
             String address = incomingMessages.getString("address");
@@ -46,22 +48,29 @@ public class MainActivity extends AppCompatActivity {
             String url = incomingMessages.getString("url");
             int positionEdited = incomingMessages.getInt("edit");
 
-            if(url.equals("")){
-                PersonContact p = new PersonContact(name, phone, address, email, "person", change);
-                if(positionEdited > -1){
-                    theList.getTheList().remove(positionEdited);
-                }
-                theList.getTheList().add(p);
-                adapter.notifyDataSetChanged();
-            }else{
-                BusinessContact p = new BusinessContact(name, phone, address, email, "business", change, url);
-                if(positionEdited > -1){
-                    theList.getTheList().remove(positionEdited);
-                }
-                theList.getTheList().add(p);
+            if(url.equals("delete")){
+                theList.getTheList().remove(positionEdited);
                 adapter.notifyDataSetChanged();
             }
-
+            else {
+                if (url.equals("")) {
+                    PersonContact p = new PersonContact(name, phone, address, email, "person", change);
+                    theList.getTheList().add(p);
+                    if(positionEdited > -1){
+                        theList.getTheList().remove(positionEdited);
+                        adapter.notifyDataSetChanged();
+                    }
+                    adapter.notifyDataSetChanged();
+                } else {
+                    BusinessContact p = new BusinessContact(name, phone, address, email, "business", change, url);
+                    theList.getTheList().add(p);
+                    if(positionEdited > -1){
+                        theList.getTheList().remove(positionEdited);
+                        adapter.notifyDataSetChanged();
+                    }
+                    adapter.notifyDataSetChanged();
+                }
+            }
         }
 
         btn_add.setOnClickListener(new View.OnClickListener() {
@@ -84,6 +93,51 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
+        btn_save.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                DataService dataService = new DataService(v.getContext());
+                dataService.writeList(theList, "ContactList.txt");
+            }
+        });
+
+        btn_load.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                DataService dataService = new DataService(v.getContext());
+                theList.getTheList().clear();
+                theList = dataService.readList("ContactList.txt");
+                adapter.notifyDataSetChanged();
+            }
+        });
+
+        sv_search.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
+            @Override
+            public boolean onQueryTextSubmit(String query) {
+                if(theList.searchFor(query) instanceof PersonContact){
+                    PersonContact searched = (PersonContact) theList.searchFor(query);
+                    for(int i = 0; i < theList.getTheList().size(); i++) {
+                        if (theList.getTheList().get(i).getPhone().equals(searched.getPhone())) {
+                            editPerson(i);
+                        }
+                    }
+                }//end if person
+                if(theList.searchFor(query) instanceof BusinessContact){
+                    BusinessContact searched = (BusinessContact) theList.searchFor(query);
+                    for(int i = 0; i < theList.getTheList().size(); i++) {
+                        if (theList.getTheList().get(i).getPhone().equals(searched.getPhone())) {
+                            editBusiness(i);
+                        }
+                    }
+                }//end if business
+                return false;
+            }
+
+            @Override
+            public boolean onQueryTextChange(String newText) {
+                return false;
+            }
+        });
 
 
     }

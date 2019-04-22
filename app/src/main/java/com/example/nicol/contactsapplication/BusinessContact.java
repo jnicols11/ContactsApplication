@@ -10,6 +10,12 @@ public class BusinessContact extends BaseContact{
         this.url = url;
     }
 
+    public BusinessContact(){
+        super("Some Business", "some number", "some address", "some email", "business");
+        this.hours = "9am-5pm";
+        this.url = "somewebsite.com";
+    }
+
 
     //Setters and Getters
     public String getHours() {

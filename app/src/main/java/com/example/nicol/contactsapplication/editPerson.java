@@ -71,6 +71,7 @@ public class editPerson extends AppCompatActivity {
                 i.putExtra("email", newEmail);
                 i.putExtra("change", newChange);
                 i.putExtra("url", newUrl);
+                i.putExtra("edit", positionToEdit);
 
                 startActivity(i);
             }
@@ -80,7 +81,7 @@ public class editPerson extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 Intent i = new Intent(v.getContext(), MainActivity.class);
-                i.putExtra("edit", positionToEdit);
+                i.putExtra("url", "delete");
                 startActivity(i);
             }
         });

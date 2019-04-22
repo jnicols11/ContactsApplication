@@ -7,6 +7,14 @@ public class PersonContact extends BaseContact {
         this.birthday = birthday;
     }
 
+    public PersonContact() {
+
+        super("Some Business", "some number", "some address", "some email", "person");
+        this.birthday = "Today";
+
+
+    }//end default
+
     public String getBirthday() {
         return birthday;
     }

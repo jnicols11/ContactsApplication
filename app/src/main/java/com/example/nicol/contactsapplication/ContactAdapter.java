@@ -51,4 +51,5 @@ public class ContactAdapter extends BaseAdapter {
 
         return onePersonLine;
     }
+
 }
