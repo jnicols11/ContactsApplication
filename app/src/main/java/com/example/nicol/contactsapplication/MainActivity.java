@@ -49,11 +49,11 @@ public class MainActivity extends AppCompatActivity {
             int positionEdited = incomingMessages.getInt("edit");
 
             if(url.equals("delete")){
-                theList.getTheList().remove(positionEdited);
+                theList.getTheList().remove(positionEdited + 1);
                 adapter.notifyDataSetChanged();
             }
             else {
-                if (url.equals("")) {
+                if(url.equals("")) {
                     PersonContact p = new PersonContact(name, phone, address, email, "person", change);
                     theList.getTheList().add(p);
                     if(positionEdited > -1){
@@ -172,6 +172,4 @@ public class MainActivity extends AppCompatActivity {
 
         startActivity(i);
     }
-
-
 }
